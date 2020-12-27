@@ -4,6 +4,13 @@ const {
   EMPTY_QUERY_FINDONE_WARNING,
 } = require("../../constants/warning.constants");
 const UserProfile = require("../../models/userProfile.model");
+const yup = require("yup");
+
+const createUserProfileSchema = yup.object().shape({
+  name: yup.string().required(),
+  username: yup.string().lowercase().required(),
+  description: yup.string(),
+});
 
 const findOne = async (params = {}) => {
   if (!params) {
@@ -16,8 +23,8 @@ const findOne = async (params = {}) => {
   return userProfile;
 };
 
-// TODO - Add validators to creation
 const create = async (params) => {
+  await createUserProfileSchema.validate({ ...params });
   const newUserProfile = new UserProfile({ ...params });
   const savedUserProfile = await newUserProfile.save();
   return savedUserProfile;
