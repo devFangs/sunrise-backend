@@ -28,10 +28,10 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   const status = err.status || INTERNAL_SERVER_ERROR;
 
-  console.log(error.message);
+  console.log(err.message);
   return res.status(status).json({
     status: "error",
-    message: error.message,
+    message: err.message,
   });
 });
 
@@ -39,6 +39,7 @@ mongoose
   .connect(DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   })
   .then(() => {
     app.listen(PORT, () => {

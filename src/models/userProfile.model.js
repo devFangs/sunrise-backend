@@ -9,6 +9,7 @@ const SocialProfileSchema = new Schema({
 const UserProfileSchema = new Schema(
   {
     name: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     socialProfile: { type: [SocialProfileSchema] },
     skills: { type: [Schema.Types.ObjectId], ref: "SkillsSchema" },
