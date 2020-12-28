@@ -1,6 +1,7 @@
 const { ACCEPTED } = require("http-status");
 const userProfile = require("../../services/userProfile");
 
+//TODO - ADD LOGS
 const getUserProfileController = async (req, res, next) => {
   const query = req.query;
 

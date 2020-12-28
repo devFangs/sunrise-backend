@@ -23,6 +23,7 @@ const findOne = async (params = {}) => {
   return userProfile;
 };
 
+//TODO - ADD LOGS
 const create = async (params) => {
   await createUserProfileSchema.validate({ ...params });
   const newUserProfile = new UserProfile({ ...params });

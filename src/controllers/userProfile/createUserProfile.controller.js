@@ -1,6 +1,8 @@
 const { CREATED } = require("http-status");
 const UserProfile = require("../../services/userProfile");
 
+//TODO - ADD LOGS
+//TODO - ADD VALIDATORS
 const createUserProfileController = async (req, res, next) => {
   const body = req.body;
 
