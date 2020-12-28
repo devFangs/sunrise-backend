@@ -1,6 +1,10 @@
 const { INTERNAL_SERVER_ERROR, CREATED } = require("http-status");
 const UserAuth = require("../../services/userAuth");
 const jwt = require("jsonwebtoken");
+const {
+  JWT_SECRET_KEY,
+  JWT_ACCESS_TOKEN_EXPIRES,
+} = require("../../config/config.development");
 
 const signupController = async (req, res, next) => {
   const body = req.body;
@@ -25,8 +29,8 @@ const signupController = async (req, res, next) => {
           email: newUser.email,
         },
       },
-      process.env.JWT_SECRET_KEY,
-      { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES }
+      JWT_SECRET_KEY,
+      { expiresIn: JWT_ACCESS_TOKEN_EXPIRES }
     );
   } catch (err) {
     err.status = INTERNAL_SERVER_ERROR;

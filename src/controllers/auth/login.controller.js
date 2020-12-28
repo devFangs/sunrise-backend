@@ -8,6 +8,10 @@ const yup = require("yup");
 const UserAuth = require("../../services/userAuth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const {
+  JWT_SECRET_KEY,
+  JWT_ACCESS_TOKEN_EXPIRES,
+} = require("../../config/config.development");
 
 const loginSchema = yup.object().shape({
   username: yup.string().required(),
@@ -60,8 +64,8 @@ const loginController = async (req, res, next) => {
       {
         user: { username: user.username, email: user.email },
       },
-      process.env.JWT_SECRET_KEY,
-      { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES }
+      JWT_SECRET_KEY,
+      { expiresIn: JWT_ACCESS_TOKEN_EXPIRES }
     );
   } catch (err) {
     err.status = INTERNAL_SERVER_ERROR;
