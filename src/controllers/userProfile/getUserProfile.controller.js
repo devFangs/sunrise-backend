@@ -1,5 +1,5 @@
 const { ACCEPTED } = require("http-status");
-const userProfile = require("../../services/userProfile");
+const UserProfile = require("../../services/userProfile");
 
 //TODO - ADD LOGS
 const getUserProfileController = async (req, res, next) => {
@@ -7,7 +7,7 @@ const getUserProfileController = async (req, res, next) => {
 
   let foundUserProfile;
   try {
-    foundUserProfile = await userProfile.findOne({ ...query });
+    foundUserProfile = await UserProfile.findOne({ ...query });
   } catch (err) {
     return next(err);
   }
