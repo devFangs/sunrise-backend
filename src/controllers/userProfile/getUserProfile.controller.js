@@ -1,4 +1,5 @@
-const { ACCEPTED } = require("http-status");
+const { ACCEPTED, NOT_FOUND } = require("http-status");
+const userProfile = require("../../services/userProfile");
 const UserProfile = require("../../services/userProfile");
 
 //TODO - ADD LOGS
@@ -9,6 +10,15 @@ const getUserProfileController = async (req, res, next) => {
   try {
     foundUserProfile = await UserProfile.findOne({ ...query });
   } catch (err) {
+    return next(err);
+  }
+
+  if (!foundUserProfile) {
+    console.log("ERROR - User profile does not exist.");
+    const err = new Error(
+      "User profile does not exist. If you are this user, please login to create your profile"
+    );
+    err.status = NOT_FOUND;
     return next(err);
   }
 
