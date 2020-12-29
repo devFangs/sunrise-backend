@@ -7,6 +7,8 @@ const UserAuthSchema = new Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     isActive: { type: Boolean, required: true, default: true },
+    hasProfile: { type: Boolean, require: true, default: false },
+    profile: { type: Schema.Types.ObjectId },
   },
   {
     collection: "user_auth",
