@@ -35,7 +35,7 @@ const create = async (params) => {
   console.log("INFO - Saving new user auth");
   const savedUserProfile = await newUserProfile.save();
   console.log("INFO - Saved new user auth");
-  return savedUserProfile;
+  return savedUserProfile.toObject();
 };
 
 const update = async (id, params) => {

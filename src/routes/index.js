@@ -21,10 +21,10 @@ router.post("/sign-up", signupController);
 router.post("/login", loginController);
 
 router.get("/user-profile", getUserProfileController);
-router.post("/user-profile", createUserProfileController);
 
 router.use(tokenValidator);
 
+router.post("/user-profile", createUserProfileController);
 router.get("/auth-ping", (req, res, next) => {
   res.json(req.user);
 });

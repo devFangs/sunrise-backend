@@ -1,5 +1,4 @@
 const { ACCEPTED, NOT_FOUND } = require("http-status");
-const userProfile = require("../../services/userProfile");
 const UserProfile = require("../../services/userProfile");
 
 //TODO - ADD LOGS
