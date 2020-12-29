@@ -16,6 +16,8 @@ const findOne = async (params = {}) => {
   if (!params) {
     console.log(EMPTY_QUERY_FINDONE_WARNING);
   }
+
+  console.log("INFO - Looking for info with given params", params);
   const userProfile = await UserProfile.findOne({ ...params });
   if (!userProfile) {
     console.log(NO_DOCUMENTS_FOUND_WARNING, params);
@@ -25,9 +27,14 @@ const findOne = async (params = {}) => {
 
 //TODO - ADD LOGS
 const create = async (params) => {
+  console.log("INFO - Validating new user profile params");
   await createUserProfileSchema.validate({ ...params });
+  console.log("INFO - Params is valid", params);
+  console.log("INFO - Creating new user profile with given params", params);
   const newUserProfile = new UserProfile({ ...params });
+  console.log("INFO - Saving new user auth");
   const savedUserProfile = await newUserProfile.save();
+  console.log("INFO - Saved new user auth");
   return savedUserProfile;
 };
 
