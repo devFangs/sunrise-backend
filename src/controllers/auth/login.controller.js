@@ -12,6 +12,7 @@ const {
   JWT_SECRET_KEY,
   JWT_ACCESS_TOKEN_EXPIRES,
 } = require("../../config/config.development");
+const { AUTH_ERROR } = require("../../constants/error.constants");
 
 const loginSchema = yup.object().shape({
   username: yup.string().required(),
@@ -42,7 +43,7 @@ const loginController = async (req, res, next) => {
 
   if (!user) {
     console.log(`ERROR - User with username ${username} does not exist`);
-    const err = new Error("Invalid username or password");
+    const err = new Error(AUTH_ERROR);
     err.status = UNAUTHORIZED;
     return next(err);
   }
@@ -59,7 +60,7 @@ const loginController = async (req, res, next) => {
 
   if (!correctPassword) {
     console.log("ERROR - Invalid password provided for username", username);
-    const err = new Error("Invalid username or password");
+    const err = new Error(AUTH_ERROR);
     err.status = UNAUTHORIZED;
     return next(err);
   }

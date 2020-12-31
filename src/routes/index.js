@@ -8,6 +8,7 @@ const {
 const {
   getUserProfileController,
 } = require("../controllers/userProfile/getUserProfile.controller");
+const { tokenValidator } = require("../middlewares/token.validator");
 
 const router = Router();
 router.use(json());
@@ -20,6 +21,12 @@ router.post("/sign-up", signupController);
 router.post("/login", loginController);
 
 router.get("/user-profile", getUserProfileController);
+
+router.use(tokenValidator);
+
 router.post("/user-profile", createUserProfileController);
+router.get("/auth-ping", (req, res, next) => {
+  res.json(req.user);
+});
 
 module.exports = router;

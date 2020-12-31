@@ -4,6 +4,7 @@ const {
 } = require("../../constants/warning.constants");
 const UserAuth = require("../../models/userAuth.model");
 const yup = require("yup");
+const { Schema } = require("mongoose");
 
 const createUserAuthSchema = yup.object().shape({
   username: yup.string().required(),
@@ -45,4 +46,28 @@ const create = async (params) => {
   return savedAuthUser.toObject();
 };
 
-module.exports = { findOne, create };
+const update = async (query = {}, update = {}) => {
+  let findUser = await UserAuth.findOne({ ...query });
+  if (!findUser) {
+    const err = new Error("User does not exist");
+    throw err;
+  }
+
+  const updateKeys = Object.keys(update);
+  // Update has profile
+  if (updateKeys.includes("hasProfile")) {
+    console.log("INFO - Update this hasProfileKey");
+    findUser.hasProfile = update.hasProfile;
+  }
+
+  if (updateKeys.includes("profile")) {
+    console.log("INFO - Update this profile");
+    findUser.profile = update.profile;
+  }
+
+  const savedUser = await findUser.save();
+
+  return savedUser.toObject();
+};
+
+module.exports = { findOne, create, update };
