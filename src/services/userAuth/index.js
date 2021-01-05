@@ -4,7 +4,6 @@ const {
 } = require("../../constants/warning.constants");
 const UserAuth = require("../../models/userAuth.model");
 const yup = require("yup");
-const { Schema } = require("mongoose");
 
 const createUserAuthSchema = yup.object().shape({
   username: yup.string().required(),
