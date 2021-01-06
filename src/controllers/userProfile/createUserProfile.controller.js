@@ -5,7 +5,6 @@ const {
   INTERNAL_SERVER_ERROR,
 } = require("http-status");
 const UserProfile = require("../../services/userProfile");
-const UserAuth = require("../../services/userAuth");
 const yup = require("yup");
 const userAuth = require("../../services/userAuth");
 
@@ -58,7 +57,7 @@ const createUserProfileController = async (req, res, next) => {
     );
   } catch (err) {
     console.log(
-      "ERROR - Error occured when updateing user auth with newly created user profile"
+      "ERROR - Error occured when updating user auth with newly created user profile"
     );
     err.status = INTERNAL_SERVER_ERROR;
     return next(err);

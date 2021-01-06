@@ -13,7 +13,7 @@ const ProjectSchema = new Schema(
     skills: { type: [Schema.Types.ObjectId], ref: "SkillsSchema" },
     shortDescription: { type: String, required: false, maxlength: 200 },
     description: { type: Array, required: false },
-    creator: { type: String, required: true },
+    username: { type: String, required: true },
   },
   {
     collection: "projects",

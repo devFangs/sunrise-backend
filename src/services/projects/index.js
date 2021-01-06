@@ -9,6 +9,7 @@ const {
 
 const createProjectSchema = yup.object().shape({
   name: yup.string().required(),
+  username: yup.string().required(),
   img: yup.string().notRequired(),
   link: yup.string().notRequired(),
   skills: yup.array(yup.mixed(Schema.Types.ObjectId).notRequired()),

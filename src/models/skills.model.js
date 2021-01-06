@@ -4,6 +4,7 @@ const SkillsSchema = new Schema(
   {
     name: { type: String, required: true },
     img: { type: String, required: true },
+    type: { type: String, required: false },
   },
   {
     collection: "skills",
